@@ -1,15 +1,25 @@
 from django.db import models
+from django.utils.text import slugify
 
 # Create your models here.
 
-class Galery (models.Model):
+class Gallery (models.Model):
     title=models.CharField(max_length=512)
 
-class Photo (models.Model):
-    pic=models.ImageField()
-    galery=models.ForeignKey('Galery', on_delete=models.CASCADE)
+    class Meta:
+        ordering = ('-id',)
 
-class tariff (models.Model):
+class Photo (models.Model):
+    pic=models.ImageField(upload_to='image/')
+    slug=models.SlugField(max_length=200, blank=True)
+    galery=models.ForeignKey('Gallery', on_delete=models.CASCADE)
+
+    def save (self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self)
+            super().save(*args, **kwargs)
+
+class Tariff (models.Model):
     name=models.CharField(max_length=512)
     time=models.CharField(max_length=128)
     much=models.IntegerField()

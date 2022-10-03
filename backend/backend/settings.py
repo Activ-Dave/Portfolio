@@ -40,14 +40,14 @@ INSTALLED_APPS = [
 #requirements
     'rest_framework',
     'corsheaders',
-    'drf_yasd',
+    'drf_yasg',
 #apps
     'portal',
     'user',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMidleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -108,12 +108,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK= {
-    'DEFAULT_PERMISSION_CLASSES':(
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+#    'DEFAULT_PERMISSION_CLASSES':(
+#        'rest_framework.permissions.IsAuthenticated',
+#    ),
+#    'DEFAULT_AUTHENTICATION_CLASSES':(
+#        'rest_framework_simplejwt.authentication.JWTAuthentication',
+#    ),
     'DEFAULT_FILTER_BACKENDS':(
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
@@ -140,4 +140,8 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_WHITELIST=[
     "http://localhost:8080",
+    "http://localhost:8081",
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR/ 'media'
